@@ -14,6 +14,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: configure pre-req for odimra deployment
       run: |
+        set -x
         echo "[$(date)] -- INFO  -- Start pre req conguration"
         echo
         
@@ -29,6 +30,7 @@ jobs:
         echo
         
         export PASSWD=password
+        export REDIS_PASSWORD=redis_password
         echo "runner:${PASSWD}" > pass
         sudo chpasswd < pass
         
@@ -102,6 +104,7 @@ jobs:
         pip3 install jmespath==0.9.5
         pip3 install ruamel.yaml==0.16.10
         pip3 install pyyaml==5.3.1
+        pip3 install cryptography==3.4.8
         echo
         
         echo "[$(date)] -- INFO  -- installed python version"
@@ -114,6 +117,9 @@ jobs:
         cp kube_deploy_nodes.yaml.tmpl kube_deploy_nodes.yaml
         echo ${PASSWD} > node_pass
         echo ${PASSWD} > vault_pass
+        echo ${REDIS_PASSWORD} > redis_inmemory_pass
+        echo ${REDIS_PASSWORD} > redis_ondisk_pass
+
         ls -ltra
         echo
         
@@ -127,13 +133,16 @@ jobs:
         echo "[$(date)] -- INFO  -- encrypt passwords"
         ./odim-vault -encode ${ODIM_CONTROLLER_PATH}/scripts/vault_pass
         ./odim-vault -key ${ODIM_CONTROLLER_PATH}/scripts/vault_pass -encrypt ${ODIM_CONTROLLER_PATH}/scripts/node_pass
-        echo
+        ./odim-vault -key ${ODIM_CONTROLLER_PATH}/scripts/vault_pass -encrypt ${ODIM_CONTROLLER_PATH}/scripts/redis_inmemory_pass
+        ./odim-vault -key ${ODIM_CONTROLLER_PATH}/scripts/vault_pass -encrypt ${ODIM_CONTROLLER_PATH}/scripts/redis_ondisk_pass
         
         mkdir -p ${cur_path}/k8s_images ${cur_path}/odim_images ${cur_path}/odim_plugins
 
         export rootServiceUUID=$(uuidgen)
         export NODE_PASS_FILEPATH=${ODIM_CONTROLLER_PATH}/scripts/node_pass
         export VAULTKEY_FILEPATH=${ODIM_CONTROLLER_PATH}/scripts/vault_pass
+        export REDIS_INMEMORY_FILEPATH=${ODIM_CONTROLLER_PATH}/scripts/redis_inmemory_pass
+        export REDIS_ONDISK_FILEPATH=${ODIM_CONTROLLER_PATH}/scripts/redis_ondisk_pass        
         export K8S_IMAGE_PATH=${cur_path}/k8s_images
         export ODIM_IMAGE_PATH=${cur_path}/odim_images
         export ODIM_PLUGIN_PATH=${cur_path}/odim_plugins
@@ -141,6 +150,8 @@ jobs:
         sed -i "/Node[23]_/d; /kubernetesImagePath:/d; /odimraImagePath:/d; s#.*deploymentID.*#deploymentID: OneNodeDeployment#; \
         s#.*httpProxy.*#httpProxy: \"\"#; s#.*httpsProxy.*#httpsProxy: \"\"#; s#.*noProxy.*#noProxy: \"\"#; \
         s#.*nodePasswordFilePath.*#nodePasswordFilePath: ${NODE_PASS_FILEPATH}#; \
+        s#.*redisInMemoryPasswordFilePath.*#redisInMemoryPasswordFilePath: ${REDIS_INMEMORY_FILEPATH}#; \
+        s#.*redisOnDiskPasswordFilePath.*#redisOnDiskPasswordFilePath: ${REDIS_ONDISK_FILEPATH}#; \
         s#.*odimControllerSrcPath.*#odimControllerSrcPath: ${ODIM_CONTROLLER_PATH}#; \
         s#.*odimVaultKeyFilePath.*#odimVaultKeyFilePath: ${VAULTKEY_FILEPATH}#; \
         s#.*odimCertsPath.*#odimCertsPath: \"\"#; s#.*odimPluginPath.*#odimPluginPath: ${ODIM_PLUGIN_PATH}#; \
@@ -191,7 +202,12 @@ jobs:
         kubectl get pods -n kube-system -o wide
         echo
         cd ${ODIM_SOURCE_PATH}/
+        echo "$(df -h)"
         time ./build_images.sh
+        sleep 30
+        echo "$(docker images)"
+        echo "$(df -h)"
+
         
         cd ${ODIM_CONTROLLER_PATH}/scripts/
         python3 odim-controller.py --deploy odimra --config ${ODIM_CONTROLLER_PATH}/scripts/kube_deploy_nodes.yaml
@@ -206,6 +222,9 @@ jobs:
                 count=$((count+1))
         done
         kubectl get pods -n odim -o wide
+        
+        echo "$(df -h)"
+
         echo "============Checking Node status================"
         
         kubectl get node -o wide 
@@ -216,9 +235,11 @@ jobs:
            
            
         echo "$VM_IP"
+
+        echo "$(df -h)"
                
         echo " ====================== Adding URP Plugin ==================================="
-        
+
         sudo mkdir -p /var/log/urplugin_logs/
         sudo chown odimra:odimra /var/log/urplugin_logs/
                        
@@ -236,7 +257,12 @@ jobs:
         helm package ${ODIM_CONTROLLER_PATH}/helmcharts/urplugin/urplugin -d ${ODIM_PLUGIN_PATH}/urplugin
         cp urplugin-config.yaml ${ODIM_PLUGIN_PATH}/urplugin
         
+        echo "$(df -h)"
+        echo "$(docker images)"
+        echo "$(docker inspect urplugin:3.0)"
+        echo "$(docker --version)"
         docker save urplugin -o ${ODIM_PLUGIN_PATH}/urplugin/urplugin.tar
+        echo "Docker save command executed successfully"
         cat urplugin-config.yaml
         
         cd ${ODIM_CONTROLLER_PATH}/scripts
