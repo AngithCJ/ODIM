@@ -251,7 +251,7 @@ jobs:
         echo "$(docker images)"
         echo "$(docker inspect urplugin:3.0)"
         echo "$(docker --version)"
-        docker save urplugin:3.0 -o ${ODIM_PLUGIN_PATH}/urplugin/urplugin.tar
+        docker save urplugin -o ${ODIM_PLUGIN_PATH}/urplugin/urplugin.tar
         echo "Docker save command executed successfully"
         cat urplugin-config.yaml
         
