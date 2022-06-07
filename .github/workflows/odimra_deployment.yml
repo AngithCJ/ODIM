@@ -202,8 +202,12 @@ jobs:
         kubectl get pods -n kube-system -o wide
         echo
         cd ${ODIM_SOURCE_PATH}/
+        echo "$(df -h)"
         time ./build_images.sh
+        sleep 30
         echo "$(docker images)"
+        echo "$(df -h)"
+
         
         cd ${ODIM_CONTROLLER_PATH}/scripts/
         python3 odim-controller.py --deploy odimra --config ${ODIM_CONTROLLER_PATH}/scripts/kube_deploy_nodes.yaml
@@ -218,6 +222,9 @@ jobs:
                 count=$((count+1))
         done
         kubectl get pods -n odim -o wide
+        
+        echo "$(df -h)"
+
         echo "============Checking Node status================"
         
         kubectl get node -o wide 
@@ -228,9 +235,11 @@ jobs:
            
            
         echo "$VM_IP"
+
+        echo "$(df -h)"
                
         echo " ====================== Adding URP Plugin ==================================="
-        
+
         sudo mkdir -p /var/log/urplugin_logs/
         sudo chown odimra:odimra /var/log/urplugin_logs/
                        
@@ -248,6 +257,7 @@ jobs:
         helm package ${ODIM_CONTROLLER_PATH}/helmcharts/urplugin/urplugin -d ${ODIM_PLUGIN_PATH}/urplugin
         cp urplugin-config.yaml ${ODIM_PLUGIN_PATH}/urplugin
         
+        echo "$(df -h)"
         echo "$(docker images)"
         echo "$(docker inspect urplugin:3.0)"
         echo "$(docker --version)"
