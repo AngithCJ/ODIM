@@ -18,7 +18,7 @@ package handle
 import (
 	"net/http"
 
-	log "github.com/sirupsen/logrus"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 	telemetryproto "github.com/ODIM-Project/ODIM/lib-utilities/proto/telemetry"

@@ -16,9 +16,9 @@
 package middleware
 
 import (
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 	"github.com/ODIM-Project/ODIM/svc-api/rpc"
 	iris "github.com/kataras/iris/v12"
-	log "github.com/sirupsen/logrus"
 )
 
 //SessionDelMiddleware is used to delete session created for basic auth

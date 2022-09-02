@@ -16,14 +16,14 @@ package main
 import (
 	"encoding/base64"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"os"
 	"strings"
 
-	"github.com/sirupsen/logrus"
-
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 	"github.com/ODIM-Project/ODIM/lib-utilities/config"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 	sessionproto "github.com/ODIM-Project/ODIM/lib-utilities/proto/session"
 	"github.com/ODIM-Project/ODIM/lib-utilities/response"
 	"github.com/ODIM-Project/ODIM/lib-utilities/services"
@@ -32,9 +32,18 @@ import (
 	iris "github.com/kataras/iris/v12"
 )
 
-var log = logrus.New()
-
 func main() {
+	// setting up the logging framework
+	hostname := os.Getenv("HOST_NAME")
+	podname := os.Getenv("POD_NAME")
+	pid := os.Getpid()
+	c := &log.Config{
+		LogFormat: log.SysLogFormat,
+		Host:      hostname,
+		ProcID:    podname + fmt.Sprintf("_%d", pid),
+	}
+	log.InitLogger(c)
+
 	// verifying the uid of the user
 	if uid := os.Geteuid(); uid == 0 {
 		log.Fatal("Api Service should not be run as the root user")

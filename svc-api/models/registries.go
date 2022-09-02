@@ -17,9 +17,10 @@ package models
 
 import (
 	"encoding/json"
+
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 	"github.com/ODIM-Project/ODIM/lib-utilities/errors"
-	log "github.com/sirupsen/logrus"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 )
 
 //GetRegistryFile fetches a resource from database using table and key

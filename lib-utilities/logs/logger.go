@@ -20,7 +20,7 @@ import (
 
 // Logger is used when you import the log package in your service
 // and logging using the package level methods.
-// This can be customized using the functions InitSysLogger or InitJSONLogger
+// This can be customized using the function InitLogger
 var Logger *logrus.Entry
 
 // LogFormat type
@@ -36,6 +36,8 @@ const (
 // Config is used for user configuration
 type Config struct {
 	LogFormat LogFormat
+	Host      string
+	ProcID    string
 }
 
 // InitLogger sets up the Logger and sets up the format and level
@@ -50,6 +52,14 @@ func InitLogger(c *Config) {
 		Logger.Logger.SetFormatter(&logrus.JSONFormatter{})
 	default:
 		Logger.Logger.SetFormatter(&ODIMSysLogFormatter{})
+	}
+
+	if c.Host != "" {
+		Logger = Logger.WithField("host", c.Host)
+	}
+
+	if c.ProcID != "" {
+		Logger = Logger.WithField("procid", c.ProcID)
 	}
 
 	// set the minimum level for logging

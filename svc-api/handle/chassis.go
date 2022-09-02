@@ -21,10 +21,10 @@ import (
 	"net/http"
 
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 	chassisproto "github.com/ODIM-Project/ODIM/lib-utilities/proto/chassis"
 	"github.com/ODIM-Project/ODIM/lib-utilities/response"
 	"github.com/kataras/iris/v12"
-	log "github.com/sirupsen/logrus"
 )
 
 // ChassisRPCs defines all the RPC methods in system service
