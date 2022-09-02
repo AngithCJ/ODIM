@@ -24,11 +24,11 @@ import (
 	"time"
 
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 	aggregatorproto "github.com/ODIM-Project/ODIM/lib-utilities/proto/aggregator"
 	"github.com/ODIM-Project/ODIM/lib-utilities/response"
 	"github.com/ODIM-Project/ODIM/svc-aggregation/agcommon"
 	"github.com/ODIM-Project/ODIM/svc-aggregation/agmodel"
-	log "github.com/sirupsen/logrus"
 )
 
 var (

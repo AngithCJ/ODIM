@@ -22,8 +22,8 @@ import (
 	dc "github.com/ODIM-Project/ODIM/lib-messagebus/datacommunicator"
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 	"github.com/ODIM-Project/ODIM/lib-utilities/config"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 	uuid "github.com/satori/go.uuid"
-	log "github.com/sirupsen/logrus"
 )
 
 //Publish will takes the system id,Event type and publishes the data to message bus
