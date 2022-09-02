@@ -16,9 +16,10 @@
 package auth
 
 import (
-	log "github.com/sirupsen/logrus"
 	"net/http"
 	"time"
+
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 
 	customLogs "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 	authproto "github.com/ODIM-Project/ODIM/lib-utilities/proto/auth"

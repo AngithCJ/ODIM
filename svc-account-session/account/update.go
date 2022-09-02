@@ -21,16 +21,17 @@ package account
 import (
 	"encoding/base64"
 	"encoding/json"
+	"net/http"
+
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 	"github.com/ODIM-Project/ODIM/lib-utilities/errors"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 	accountproto "github.com/ODIM-Project/ODIM/lib-utilities/proto/account"
 	"github.com/ODIM-Project/ODIM/lib-utilities/response"
 	"github.com/ODIM-Project/ODIM/svc-account-session/asmodel"
 	"github.com/ODIM-Project/ODIM/svc-account-session/asresponse"
 	"github.com/ODIM-Project/ODIM/svc-account-session/auth"
-	log "github.com/sirupsen/logrus"
 	"golang.org/x/crypto/sha3"
-	"net/http"
 )
 
 // Update defines the updation of the account details. Every account details can be

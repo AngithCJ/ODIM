@@ -18,17 +18,18 @@ package session
 import (
 	"encoding/json"
 	"fmt"
+
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 	"github.com/ODIM-Project/ODIM/lib-utilities/config"
 	"github.com/ODIM-Project/ODIM/lib-utilities/errors"
 	customLogs "github.com/ODIM-Project/ODIM/lib-utilities/logs"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 	sessionproto "github.com/ODIM-Project/ODIM/lib-utilities/proto/session"
 	"github.com/ODIM-Project/ODIM/lib-utilities/response"
 	"github.com/ODIM-Project/ODIM/svc-account-session/asmodel"
 	"github.com/ODIM-Project/ODIM/svc-account-session/asresponse"
 	"github.com/ODIM-Project/ODIM/svc-account-session/auth"
 	uuid "github.com/satori/go.uuid"
-	log "github.com/sirupsen/logrus"
 
 	"net/http"
 	"time"

@@ -22,11 +22,12 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	log "github.com/sirupsen/logrus"
-	"golang.org/x/crypto/sha3"
 	"net/http"
 	"regexp"
 	"strings"
+
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
+	"golang.org/x/crypto/sha3"
 
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 	"github.com/ODIM-Project/ODIM/lib-utilities/config"

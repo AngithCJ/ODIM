@@ -87,6 +87,14 @@ spec:
               value: {{ .Values.odimra.haDeploymentEnabled | quote }}
             - name: ODIM_NAMESPACE
               value: {{ .Values.odimra.namespace | quote }}
+            - name: HOST_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
           image: account-session:{{ .Values.odimra.accountSessionImageTag }}
           imagePullPolicy: IfNotPresent
           ports:
