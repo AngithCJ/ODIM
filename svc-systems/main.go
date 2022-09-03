@@ -16,11 +16,13 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"os"
 
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 	"github.com/ODIM-Project/ODIM/lib-utilities/config"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 	chassisproto "github.com/ODIM-Project/ODIM/lib-utilities/proto/chassis"
 	systemsproto "github.com/ODIM-Project/ODIM/lib-utilities/proto/systems"
 	"github.com/ODIM-Project/ODIM/lib-utilities/services"
@@ -30,13 +32,20 @@ import (
 	"github.com/ODIM-Project/ODIM/svc-systems/scommon"
 	"github.com/ODIM-Project/ODIM/svc-systems/smodel"
 	"github.com/ODIM-Project/ODIM/svc-systems/systems"
-
-	"github.com/sirupsen/logrus"
 )
 
-var log = logrus.New()
-
 func main() {
+	// setting up the logging framework
+	hostname := os.Getenv("HOST_NAME")
+	podname := os.Getenv("POD_NAME")
+	pid := os.Getpid()
+	c := &log.Config{
+		LogFormat: log.SysLogFormat,
+		Host:      hostname,
+		ProcID:    podname + fmt.Sprintf("_%d", pid),
+	}
+	log.InitLogger(c)
+
 	// verifying the uid of the user
 	if uid := os.Geteuid(); uid == 0 {
 		log.Fatal("System Service should not be run as the root user")

@@ -25,8 +25,8 @@ import (
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 	"github.com/ODIM-Project/ODIM/lib-utilities/errors"
 
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 	"github.com/gomodule/redigo/redis"
-	log "github.com/sirupsen/logrus"
 )
 
 //Target is for sending the requst to south bound/plugin
