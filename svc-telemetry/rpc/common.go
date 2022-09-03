@@ -19,10 +19,10 @@ import (
 
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 	teleproto "github.com/ODIM-Project/ODIM/lib-utilities/proto/telemetry"
 	"github.com/ODIM-Project/ODIM/lib-utilities/response"
 	"github.com/ODIM-Project/ODIM/svc-telemetry/telemetry"
-	log "github.com/sirupsen/logrus"
 )
 
 // Telemetry struct helps to register service
