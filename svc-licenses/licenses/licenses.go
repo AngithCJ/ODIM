@@ -28,7 +28,7 @@ import (
 	lcommon "github.com/ODIM-Project/ODIM/svc-licenses/lcommon"
 	"github.com/ODIM-Project/ODIM/svc-licenses/model"
 
-	log "github.com/sirupsen/logrus"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 )
 
 var (
@@ -141,7 +141,7 @@ func (e *ExternalInterface) InstallLicenseService(req *licenseproto.InstallLicen
 	} else if len(installreq.Links.Link) == 0 {
 		errMsg := "Invalid request, mandatory field AuthorizedDevices links is missing"
 		log.Error(errMsg)
-	return common.GeneralError(http.StatusBadRequest, response.PropertyMissing, errMsg, []interface{}{"LicenseString"}, nil)
+		return common.GeneralError(http.StatusBadRequest, response.PropertyMissing, errMsg, []interface{}{"LicenseString"}, nil)
 
 	}
 	var serverURI string
