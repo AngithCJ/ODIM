@@ -26,11 +26,11 @@ import (
 
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 	"github.com/ODIM-Project/ODIM/lib-utilities/config"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 	updateproto "github.com/ODIM-Project/ODIM/lib-utilities/proto/update"
 	"github.com/ODIM-Project/ODIM/lib-utilities/response"
 	"github.com/ODIM-Project/ODIM/svc-update/ucommon"
 	"github.com/ODIM-Project/ODIM/svc-update/umodel"
-	log "github.com/sirupsen/logrus"
 )
 
 var (

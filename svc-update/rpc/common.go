@@ -16,11 +16,12 @@ package rpc
 
 import (
 	"encoding/json"
+
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 	updateproto "github.com/ODIM-Project/ODIM/lib-utilities/proto/update"
 	"github.com/ODIM-Project/ODIM/lib-utilities/response"
 	"github.com/ODIM-Project/ODIM/svc-update/update"
-	log "github.com/sirupsen/logrus"
 )
 
 // Updater struct helps to register service
