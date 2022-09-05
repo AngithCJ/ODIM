@@ -201,44 +201,44 @@ func Panicln(args ...interface{}) {
 	Logger.Panicln(args...)
 }
 
-// TraceWithFileds calls Trace method on package level after appending the fields passed
-func TraceWithFileds(fields map[string]interface{}, args ...interface{}) {
+// TraceWithFields calls Trace method on package level after appending the fields passed
+func TraceWithFields(fields map[string]interface{}, args ...interface{}) {
 	data := getFields(fields)
 	Logger.WithFields(data).Trace(args...)
 }
 
-// DebugWithFileds calls Debug method on package level after appending the fields passed
-func DebugWithFileds(fields map[string]interface{}, args ...interface{}) {
+// DebugWithFields calls Debug method on package level after appending the fields passed
+func DebugWithFields(fields map[string]interface{}, args ...interface{}) {
 	data := getFields(fields)
 	Logger.WithFields(data).Debug(args...)
 }
 
-// InfoWithFileds calls Info method on package level after appending the fields passed
-func InfoWithFileds(fields map[string]interface{}, args ...interface{}) {
+// InfoWithFields calls Info method on package level after appending the fields passed
+func InfoWithFields(fields map[string]interface{}, args ...interface{}) {
 	data := getFields(fields)
 	Logger.WithFields(data).Info(args...)
 }
 
-// PrintWithFileds calls Info method on package level after appending the fields passed
-func PrintWithFileds(fields map[string]interface{}, args ...interface{}) {
+// PrintWithFields calls Info method on package level after appending the fields passed
+func PrintWithFields(fields map[string]interface{}, args ...interface{}) {
 	data := getFields(fields)
 	Logger.WithFields(data).Info(args...)
 }
 
-// WarnWithFileds calls Warn method on package level after appending the fields passed
-func WarnWithFileds(fields map[string]interface{}, args ...interface{}) {
+// WarnWithFields calls Warn method on package level after appending the fields passed
+func WarnWithFields(fields map[string]interface{}, args ...interface{}) {
 	data := getFields(fields)
 	Logger.WithFields(data).Warn(args...)
 }
 
-// ErrorWithFileds calls Error method on package level after appending the fields passed
-func ErrorWithFileds(fields map[string]interface{}, args ...interface{}) {
+// ErrorWithFields calls Error method on package level after appending the fields passed
+func ErrorWithFields(fields map[string]interface{}, args ...interface{}) {
 	data := getFields(fields)
 	Logger.WithFields(data).Error(args...)
 }
 
-// PanicWithFileds calls Panic method on package level after appending the fields passed
-func PanicWithFileds(fields map[string]interface{}, args ...interface{}) {
+// PanicWithFields calls Panic method on package level after appending the fields passed
+func PanicWithFields(fields map[string]interface{}, args ...interface{}) {
 	data := getFields(fields)
 	Logger.WithFields(data).Panic(args...)
 }
