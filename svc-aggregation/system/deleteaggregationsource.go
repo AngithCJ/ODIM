@@ -21,7 +21,7 @@ import (
 	"reflect"
 	"strings"
 
-	log "github.com/sirupsen/logrus"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 
 	dmtf "github.com/ODIM-Project/ODIM/lib-dmtf/model"
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"

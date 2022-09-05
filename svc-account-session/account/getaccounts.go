@@ -19,15 +19,16 @@ package account
 // IMPORT Section
 // ---------------------------------------------------------------------------------------
 import (
+	"net/http"
+
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 	"github.com/ODIM-Project/ODIM/lib-utilities/config"
 	"github.com/ODIM-Project/ODIM/lib-utilities/errors"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 	"github.com/ODIM-Project/ODIM/lib-utilities/response"
 	"github.com/ODIM-Project/ODIM/svc-account-session/asmodel"
 	"github.com/ODIM-Project/ODIM/svc-account-session/asresponse"
 	"github.com/ODIM-Project/ODIM/svc-account-session/auth"
-	log "github.com/sirupsen/logrus"
-	"net/http"
 )
 
 // GetAllAccounts defines the admin functionality of listing of all accounts.

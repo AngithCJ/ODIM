@@ -15,20 +15,29 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 	"github.com/ODIM-Project/ODIM/lib-utilities/config"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 	licenseproto "github.com/ODIM-Project/ODIM/lib-utilities/proto/licenses"
 	"github.com/ODIM-Project/ODIM/lib-utilities/services"
 	"github.com/ODIM-Project/ODIM/svc-licenses/rpc"
-
-	"github.com/sirupsen/logrus"
 )
 
-var log = logrus.New()
-
 func main() {
+	// setting up the logging framework
+	hostname := os.Getenv("HOST_NAME")
+	podname := os.Getenv("POD_NAME")
+	pid := os.Getpid()
+	c := &log.Config{
+		LogFormat: log.SysLogFormat,
+		Host:      hostname,
+		ProcID:    podname + fmt.Sprintf("_%d", pid),
+	}
+	log.InitLogger(c)
+
 	if uid := os.Geteuid(); uid == 0 {
 		log.Error("Licenses Service should not be run as the root user")
 	}

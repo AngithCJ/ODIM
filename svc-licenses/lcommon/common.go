@@ -29,7 +29,7 @@ import (
 	"github.com/ODIM-Project/ODIM/lib-utilities/response"
 	"github.com/ODIM-Project/ODIM/svc-licenses/model"
 
-	log "github.com/sirupsen/logrus"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 )
 
 //GetAllKeysFromTable fetches all keys in a given table

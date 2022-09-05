@@ -27,9 +27,9 @@ import (
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 	"github.com/ODIM-Project/ODIM/lib-utilities/config"
 	"github.com/ODIM-Project/ODIM/lib-utilities/errors"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 	"github.com/ODIM-Project/ODIM/svc-aggregation/agmodel"
 	uuid "github.com/satori/go.uuid"
-	log "github.com/sirupsen/logrus"
 )
 
 // DBInterface hold interface for db functions

@@ -7,8 +7,8 @@ import (
 	"strconv"
 	"strings"
 
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 	iris "github.com/kataras/iris/v12"
-	log "github.com/sirupsen/logrus"
 
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 	"github.com/ODIM-Project/ODIM/lib-utilities/config"

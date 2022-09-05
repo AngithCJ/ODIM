@@ -18,15 +18,16 @@ package fabrics
 import (
 	"encoding/json"
 	"fmt"
-	dmtf "github.com/ODIM-Project/ODIM/lib-dmtf/model"
-	fabricsproto "github.com/ODIM-Project/ODIM/lib-utilities/proto/fabrics"
-	"github.com/ODIM-Project/ODIM/svc-fabrics/fabresponse"
-	log "github.com/sirupsen/logrus"
 	"io/ioutil"
 	"net/http"
 	"strconv"
 	"strings"
 	"sync"
+
+	dmtf "github.com/ODIM-Project/ODIM/lib-dmtf/model"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
+	fabricsproto "github.com/ODIM-Project/ODIM/lib-utilities/proto/fabrics"
+	"github.com/ODIM-Project/ODIM/svc-fabrics/fabresponse"
 
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 	"github.com/ODIM-Project/ODIM/lib-utilities/config"

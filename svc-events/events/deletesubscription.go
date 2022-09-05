@@ -31,7 +31,7 @@ import (
 
 	aggregatorproto "github.com/ODIM-Project/ODIM/lib-utilities/proto/aggregator"
 
-	log "github.com/sirupsen/logrus"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 	"github.com/ODIM-Project/ODIM/lib-utilities/config"

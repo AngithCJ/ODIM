@@ -27,6 +27,7 @@ import (
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 	"github.com/ODIM-Project/ODIM/lib-utilities/config"
 	customLogs "github.com/ODIM-Project/ODIM/lib-utilities/logs"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 	"github.com/ODIM-Project/ODIM/lib-utilities/response"
 	srv "github.com/ODIM-Project/ODIM/lib-utilities/services"
 	"github.com/ODIM-Project/ODIM/svc-api/handle"
@@ -34,7 +35,6 @@ import (
 	"github.com/ODIM-Project/ODIM/svc-api/ratelimiter"
 	"github.com/ODIM-Project/ODIM/svc-api/rpc"
 	"github.com/kataras/iris/v12"
-	log "github.com/sirupsen/logrus"
 )
 
 //Router method to register API handlers.

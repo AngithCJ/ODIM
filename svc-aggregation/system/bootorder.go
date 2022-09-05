@@ -18,11 +18,12 @@ package system
 import (
 	"encoding/json"
 	"fmt"
-	log "github.com/sirupsen/logrus"
 	"net/http"
 	"runtime"
 	"strings"
 	"sync"
+
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 	aggregatorproto "github.com/ODIM-Project/ODIM/lib-utilities/proto/aggregator"

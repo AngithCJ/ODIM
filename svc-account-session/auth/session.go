@@ -17,9 +17,10 @@ package auth
 
 import (
 	"encoding/base64"
-	log "github.com/sirupsen/logrus"
 	"sync"
 	"time"
+
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 
 	"github.com/ODIM-Project/ODIM/lib-utilities/config"
 	"github.com/ODIM-Project/ODIM/lib-utilities/errors"

@@ -21,7 +21,7 @@ import (
 
 	"net/http"
 
-	log "github.com/sirupsen/logrus"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 
 	fabricsproto "github.com/ODIM-Project/ODIM/lib-utilities/proto/fabrics"
 	"github.com/ODIM-Project/ODIM/lib-utilities/response"

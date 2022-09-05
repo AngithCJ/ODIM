@@ -14,14 +14,14 @@
 package main
 
 import (
+	"fmt"
 	"os"
-
-	"github.com/sirupsen/logrus"
 
 	dc "github.com/ODIM-Project/ODIM/lib-messagebus/datacommunicator"
 	"github.com/ODIM-Project/ODIM/lib-rest-client/pmbhandle"
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 	"github.com/ODIM-Project/ODIM/lib-utilities/config"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 	aggregatorproto "github.com/ODIM-Project/ODIM/lib-utilities/proto/aggregator"
 	"github.com/ODIM-Project/ODIM/lib-utilities/services"
 	"github.com/ODIM-Project/ODIM/svc-aggregation/agcommon"
@@ -38,9 +38,17 @@ type Schema struct {
 	QueryKeys     []string `json:"queryKeys"`
 }
 
-var log = logrus.New()
-
 func main() {
+	// setting up the logging framework
+	hostname := os.Getenv("HOST_NAME")
+	podname := os.Getenv("POD_NAME")
+	pid := os.Getpid()
+	c := &log.Config{
+		LogFormat: log.SysLogFormat,
+		Host:      hostname,
+		ProcID:    podname + fmt.Sprintf("_%d", pid),
+	}
+	log.InitLogger(c)
 	// verifying the uid of the user
 	if uid := os.Geteuid(); uid == 0 {
 		log.Fatal("Aggregation Service should not be run as the root user")

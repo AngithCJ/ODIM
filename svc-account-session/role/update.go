@@ -17,9 +17,10 @@ package role
 
 import (
 	"encoding/json"
-	log "github.com/sirupsen/logrus"
 	"net/http"
 	"reflect"
+
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 	roleproto "github.com/ODIM-Project/ODIM/lib-utilities/proto/role"

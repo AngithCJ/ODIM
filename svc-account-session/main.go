@@ -14,8 +14,10 @@
 package main
 
 import (
-	"github.com/sirupsen/logrus"
+	"fmt"
 	"os"
+
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 	"github.com/ODIM-Project/ODIM/lib-utilities/config"
@@ -27,9 +29,17 @@ import (
 	"github.com/ODIM-Project/ODIM/svc-account-session/rpc"
 )
 
-var log = logrus.New()
-
 func main() {
+	// setting up the logging framework
+	hostname := os.Getenv("HOST_NAME")
+	podname := os.Getenv("POD_NAME")
+	pid := os.Getpid()
+	c := &log.Config{
+		LogFormat: log.SysLogFormat,
+		Host:      hostname,
+		ProcID:    podname + fmt.Sprintf("_%d", pid),
+	}
+	log.InitLogger(c)
 	// verifying the uid of the user
 	if uid := os.Geteuid(); uid == 0 {
 		log.Fatal("AccountSession Service should not be run as the root user")

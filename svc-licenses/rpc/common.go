@@ -21,7 +21,7 @@ import (
 	"github.com/ODIM-Project/ODIM/lib-utilities/response"
 	"github.com/ODIM-Project/ODIM/svc-licenses/licenses"
 
-	log "github.com/sirupsen/logrus"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 )
 
 // Licenses struct helps to register service

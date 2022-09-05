@@ -25,8 +25,9 @@ import (
 	"github.com/ODIM-Project/ODIM/svc-account-session/auth"
 	"github.com/ODIM-Project/ODIM/svc-account-session/session"
 
-	log "github.com/sirupsen/logrus"
 	"net/http"
+
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 )
 
 func doSessionAuthAndUpdate(resp *response.RPC, sessionToken string) (*asmodel.Session, error) {

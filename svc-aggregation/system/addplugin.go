@@ -17,17 +17,18 @@ package system
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
+	"strings"
+
 	"github.com/ODIM-Project/ODIM/lib-dmtf/model"
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 	"github.com/ODIM-Project/ODIM/lib-utilities/config"
 	"github.com/ODIM-Project/ODIM/lib-utilities/errors"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 	"github.com/ODIM-Project/ODIM/lib-utilities/response"
 	"github.com/ODIM-Project/ODIM/svc-aggregation/agcommon"
 	"github.com/ODIM-Project/ODIM/svc-aggregation/agmodel"
 	"github.com/ODIM-Project/ODIM/svc-aggregation/agresponse"
-	log "github.com/sirupsen/logrus"
-	"net/http"
-	"strings"
 )
 
 func (e *ExternalInterface) addPluginData(req AddResourceRequest, taskID, targetURI string, pluginContactRequest getResourceRequest, queueList []string, cmVariants connectionMethodVariants) (response.RPC, string, []byte) {

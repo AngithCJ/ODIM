@@ -18,7 +18,7 @@ package handle
 import (
 	"net/http"
 
-	log "github.com/sirupsen/logrus"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 	taskproto "github.com/ODIM-Project/ODIM/lib-utilities/proto/task"

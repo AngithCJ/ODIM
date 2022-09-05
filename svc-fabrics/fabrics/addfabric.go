@@ -22,10 +22,10 @@ import (
 	"strings"
 
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 	fabricsproto "github.com/ODIM-Project/ODIM/lib-utilities/proto/fabrics"
 	"github.com/ODIM-Project/ODIM/lib-utilities/response"
 	"github.com/ODIM-Project/ODIM/svc-fabrics/fabmodel"
-	log "github.com/sirupsen/logrus"
 )
 
 //AddFabric holds the logic for Adding fabric

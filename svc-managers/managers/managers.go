@@ -27,12 +27,12 @@ import (
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 	"github.com/ODIM-Project/ODIM/lib-utilities/config"
 	"github.com/ODIM-Project/ODIM/lib-utilities/errors"
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 	managersproto "github.com/ODIM-Project/ODIM/lib-utilities/proto/managers"
 	"github.com/ODIM-Project/ODIM/lib-utilities/response"
 	"github.com/ODIM-Project/ODIM/svc-managers/mgrcommon"
 	"github.com/ODIM-Project/ODIM/svc-managers/mgrmodel"
 	"github.com/ODIM-Project/ODIM/svc-managers/mgrresponse"
-	log "github.com/sirupsen/logrus"
 	"gopkg.in/go-playground/validator.v9"
 )
 

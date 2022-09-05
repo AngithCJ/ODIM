@@ -16,8 +16,9 @@
 package role
 
 import (
-	log "github.com/sirupsen/logrus"
 	"net/http"
+
+	log "github.com/ODIM-Project/ODIM/lib-utilities/logs"
 
 	"github.com/ODIM-Project/ODIM/lib-utilities/common"
 	"github.com/ODIM-Project/ODIM/lib-utilities/config"

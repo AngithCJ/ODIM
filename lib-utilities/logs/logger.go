@@ -20,7 +20,7 @@ import (
 
 // Logger is used when you import the log package in your service
 // and logging using the package level methods.
-// This can be customized using the functions InitSysLogger or InitJSONLogger
+// This can be customized using the function InitLogger
 var Logger *logrus.Entry
 
 // LogFormat type
@@ -36,11 +36,16 @@ const (
 // Config is used for user configuration
 type Config struct {
 	LogFormat LogFormat
+	Host      string
+	ProcID    string
+}
+
+func init() {
+	Logger = logrus.NewEntry(logrus.New())
 }
 
 // InitLogger sets up the Logger and sets up the format and level
 func InitLogger(c *Config) {
-	Logger = logrus.NewEntry(logrus.New())
 
 	// setting logger format
 	switch c.LogFormat {
@@ -50,6 +55,14 @@ func InitLogger(c *Config) {
 		Logger.Logger.SetFormatter(&logrus.JSONFormatter{})
 	default:
 		Logger.Logger.SetFormatter(&ODIMSysLogFormatter{})
+	}
+
+	if c.Host != "" {
+		Logger = Logger.WithField("host", c.Host)
+	}
+
+	if c.ProcID != "" {
+		Logger = Logger.WithField("procid", c.ProcID)
 	}
 
 	// set the minimum level for logging
@@ -191,44 +204,44 @@ func Panicln(args ...interface{}) {
 	Logger.Panicln(args...)
 }
 
-// TraceWithFileds calls Trace method on package level after appending the fields passed
-func TraceWithFileds(fields map[string]interface{}, args ...interface{}) {
+// TraceWithFields calls Trace method on package level after appending the fields passed
+func TraceWithFields(fields map[string]interface{}, args ...interface{}) {
 	data := getFields(fields)
 	Logger.WithFields(data).Trace(args...)
 }
 
-// DebugWithFileds calls Debug method on package level after appending the fields passed
-func DebugWithFileds(fields map[string]interface{}, args ...interface{}) {
+// DebugWithFields calls Debug method on package level after appending the fields passed
+func DebugWithFields(fields map[string]interface{}, args ...interface{}) {
 	data := getFields(fields)
 	Logger.WithFields(data).Debug(args...)
 }
 
-// InfoWithFileds calls Info method on package level after appending the fields passed
-func InfoWithFileds(fields map[string]interface{}, args ...interface{}) {
+// InfoWithFields calls Info method on package level after appending the fields passed
+func InfoWithFields(fields map[string]interface{}, args ...interface{}) {
 	data := getFields(fields)
 	Logger.WithFields(data).Info(args...)
 }
 
-// PrintWithFileds calls Info method on package level after appending the fields passed
-func PrintWithFileds(fields map[string]interface{}, args ...interface{}) {
+// PrintWithFields calls Info method on package level after appending the fields passed
+func PrintWithFields(fields map[string]interface{}, args ...interface{}) {
 	data := getFields(fields)
 	Logger.WithFields(data).Info(args...)
 }
 
-// WarnWithFileds calls Warn method on package level after appending the fields passed
-func WarnWithFileds(fields map[string]interface{}, args ...interface{}) {
+// WarnWithFields calls Warn method on package level after appending the fields passed
+func WarnWithFields(fields map[string]interface{}, args ...interface{}) {
 	data := getFields(fields)
 	Logger.WithFields(data).Warn(args...)
 }
 
-// ErrorWithFileds calls Error method on package level after appending the fields passed
-func ErrorWithFileds(fields map[string]interface{}, args ...interface{}) {
+// ErrorWithFields calls Error method on package level after appending the fields passed
+func ErrorWithFields(fields map[string]interface{}, args ...interface{}) {
 	data := getFields(fields)
 	Logger.WithFields(data).Error(args...)
 }
 
-// PanicWithFileds calls Panic method on package level after appending the fields passed
-func PanicWithFileds(fields map[string]interface{}, args ...interface{}) {
+// PanicWithFields calls Panic method on package level after appending the fields passed
+func PanicWithFields(fields map[string]interface{}, args ...interface{}) {
 	data := getFields(fields)
 	Logger.WithFields(data).Panic(args...)
 }
