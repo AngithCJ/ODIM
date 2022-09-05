@@ -40,9 +40,12 @@ type Config struct {
 	ProcID    string
 }
 
+func init() {
+	Logger = logrus.NewEntry(logrus.New())
+}
+
 // InitLogger sets up the Logger and sets up the format and level
 func InitLogger(c *Config) {
-	Logger = logrus.NewEntry(logrus.New())
 
 	// setting logger format
 	switch c.LogFormat {
