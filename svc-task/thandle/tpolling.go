@@ -88,6 +88,10 @@ func (ts *TasksRPC) PollPlugin(ctx context.Context) {
 				l.LogWithFields(ctx).Errorf("Plugin instance with ip %s is not accessible : error : %s. retrying...",
 					task.IP, err.Error())
 				retry++
+			} else {
+				l.LogWithFields(ctx).Errorf("Error while getting taskmon response for plugin taskmon %s and odim task id %s from plugin with IP %s : error : %s",
+					task.PluginTaskMonURL, task.OdimTaskID, task.IP, err.Error())
+				break
 			}
 		}
 
@@ -132,9 +136,7 @@ func isPluginConnectionError(err error) bool {
 	}
 	switch t := err.(type) {
 	case *net.OpError:
-		if t.Op == "dial" || t.Op == "read" {
-			return true
-		}
+		return true
 
 	case syscall.Errno:
 		if t == syscall.ECONNREFUSED {
