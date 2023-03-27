@@ -397,6 +397,8 @@ func (e *ExternalInterface) VirtualMediaActions(ctx context.Context, req *manage
 
 	// If the virtualmedia action is success then updating DB
 	if resp.StatusCode == http.StatusAccepted {
+		l.Log.Debugf("Plugin responded with status code %v. odim task id : %v, plugin taskmon: %v, plugin IP: %v",
+			resp.StatusCode, taskID, plugin.Location, plugin.PluginIP)
 		services.SavePluginTaskInfo(ctx, plugin.PluginIP, plugin.PluginServerName, taskID, plugin.Location)
 	}
 	e.saveMediaDetails(ctx, req)
@@ -693,6 +695,8 @@ func (e *ExternalInterface) CreateRemoteAccountService(ctx context.Context, req 
 	plugin, resp := e.deviceCommunication(ctx, uri, uuid, requestData[1], http.MethodPost, requestBody)
 
 	if resp.StatusCode == http.StatusAccepted {
+		l.Log.Debugf("Plugin responded with status code %v. odim task id : %v, plugin taskmon: %v, plugin IP: %v",
+			resp.StatusCode, taskID, plugin.Location, plugin.PluginIP)
 		e.DB.SavePluginTaskInfo(ctx, plugin.PluginIP, plugin.PluginServerName,
 			taskID, plugin.Location)
 		return
@@ -809,6 +813,8 @@ func (e *ExternalInterface) UpdateRemoteAccountService(ctx context.Context, req 
 	plugin, resp := e.deviceCommunication(ctx, uri, uuid, requestData[1], http.MethodPatch, requestBody)
 
 	if resp.StatusCode == http.StatusAccepted {
+		l.Log.Debugf("Plugin responded with status code %v. odim task id : %v, plugin taskmon: %v, plugin IP: %v",
+			resp.StatusCode, taskID, plugin.Location, plugin.PluginIP)
 		e.DB.SavePluginTaskInfo(ctx, plugin.PluginIP, plugin.PluginServerName,
 			taskID, plugin.Location)
 		return
@@ -853,6 +859,8 @@ func (e *ExternalInterface) DeleteRemoteAccountService(ctx context.Context, req 
 
 	plugin, resp := e.deviceCommunication(ctx, uri, uuid, requestData[1], http.MethodDelete, nil)
 	if resp.StatusCode == http.StatusAccepted {
+		l.Log.Debugf("Plugin responded with status code %v. odim task id : %v, plugin taskmon: %v, plugin IP: %v",
+			resp.StatusCode, taskID, plugin.Location, plugin.PluginIP)
 		e.DB.SavePluginTaskInfo(ctx, plugin.PluginIP, plugin.PluginServerName,
 			taskID, plugin.Location)
 		return

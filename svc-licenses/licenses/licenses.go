@@ -398,6 +398,8 @@ func (e *ExternalInterface) sendRequest(ctx context.Context, uuid, sessionUserNa
 		getResponse.StatusCode, getResponse.StatusMessage)
 
 	if getResponse.StatusCode == http.StatusAccepted {
+		l.Log.Debugf("Plugin responded with status code %v. odim task id : %v, plugin taskmon: %v, plugin IP: %v",
+			resp.StatusCode, taskID, pluginTaskInfo.Location, pluginTaskInfo.PluginIP)
 		services.SavePluginTaskInfo(ctx, pluginTaskInfo.PluginIP, plugin.IP,
 			subTaskID, pluginTaskInfo.Location)
 		subTaskChannel <- http.StatusAccepted

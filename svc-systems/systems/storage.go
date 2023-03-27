@@ -200,6 +200,8 @@ func (e *ExternalInterface) CreateVolume(ctx context.Context, req *systemsproto.
 		return
 	}
 	if getResponse.StatusCode == http.StatusAccepted {
+		l.Log.Debugf("Plugin responded with status code %v. odim task id : %v, plugin taskmon: %v, plugin IP: %v",
+			getResponse.StatusCode, taskID, location, pluginIP)
 		scommon.SavePluginTaskInfo(ctx, pluginIP, plugin.IP, taskID, location)
 		return
 	}

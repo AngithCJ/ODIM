@@ -169,6 +169,8 @@ func (p *PluginContact) ComputerSystemReset(ctx context.Context,
 	}
 
 	if getResponse.StatusCode == http.StatusAccepted {
+		l.Log.Debugf("Plugin responded with status code %v. odim task id : %v, plugin taskmon: %v, plugin IP: %v",
+			getResponse.StatusCode, taskID, location, pluginIP)
 		scommon.SavePluginTaskInfo(ctx, pluginIP, plugin.IP, taskID, location)
 		return
 	}
